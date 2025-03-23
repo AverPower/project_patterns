@@ -1,5 +1,8 @@
 from typing import override
-from .wall import 
+
+from wall import BrickWall, WoodWall
+from roof import TileRoof, WoodRoof
+from window import PlasticFrameWindow, WoodFrameWindow
 
 class HouseFactory:
     def createWall(self):
@@ -15,31 +18,25 @@ class HouseFactory:
 class StoneHouseFactory(HouseFactory):
     @override
     def createWall(self):
-        ...
+        return BrickWall()
     
     @override
     def createRoof(self):
-        ...
+        return TileRoof()
 
     @override
     def createWindow(self):
-        ...
+        return PlasticFrameWindow()
 
-public class StoneHouseFactory implements HouseFactory {
+class WoodHouseFactory(HouseFactory):
+    @override
+    def createWall(self):
+        return WoodWall()
+    
+    @override
+    def createRoof(self):
+        return WoodRoof()
 
-	@Override
-	public Wall createWall() {
-		return new BrickWall();
-	}
-
-	@Override
-	public Roof createRoof() {
-		return new TileRoof();
-	}
-
-	@Override
-	public Window createWindow() {
-		return new PlasticFrameWindow();
-	}
-
-}
+    @override
+    def createWindow(self):
+        return WoodFrameWindow()
