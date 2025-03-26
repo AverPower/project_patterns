@@ -10,13 +10,10 @@ class WeatherAdapter:
     def __init__(self, weather_service):
         self.weather_service = weather_service
 
-    def get_weather_data(self, city):
-        if isinstance(self.weather_service, YahooWeather):
-            data = self.weather_service.request_weather(city)
-            return {"temperature": data["temp"]}
-        else:
-            data = self.weather_service.get_weather(city)
-            return {"temperature": data["temperature"]}
+    def get_weather(self, city):
+        data = self.weather_service.request_weather(city)
+        return {"location": data['city'], "temperature": data['temp'][1:]}
+
 
 
 class YahooWeatherService:
@@ -42,7 +39,7 @@ def main():
     # Использование метода композиции
     yahoo = YahooWeather()
     adapter = WeatherAdapter(yahoo)
-    print(adapter.get_weather_data("Москва"))  # {'temperature': '+25°C'}
+    print(adapter.get_weather("Москва"))  # {'temperature': '+25°C'}
 
     # Использование метода наследования 
     adapter = WeatherAdapterService()
