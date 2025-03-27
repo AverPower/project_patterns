@@ -23,6 +23,9 @@ class TreeNode:
     def add_child(self, child):
         self.children.append(child)
 
+    def __repr__(self):
+        return f'TreeNode {self.value}'
+
 class TreeIterator:
     def __init__(self, root):
         self.stack = [root]
@@ -34,7 +37,7 @@ class TreeIterator:
         if not self.stack:
             raise StopIteration
         node = self.stack.pop()
-        self.stack.extend(reversed(node.children))  # Добавляем детей в стек
+        self.stack.extend(reversed(node.children)) # Добавляем детей в стек
         return node.value
 
 
